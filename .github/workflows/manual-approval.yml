@@ -1,0 +1,48 @@
+name: Manual Approval Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Build and Test
+      run: |
+        # Add your build and test commands here
+        echo "Building and testing..."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to Staging
+      run: |
+        # Add deployment commands for staging environment
+        echo "Deploying to staging..."
+
+  approve:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Manual Approval
+      id: approval
+      run: echo "Manual approval required"
+
+  promote:
+    needs: approve
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to Production
+      run: |
+        # Add deployment commands for production environment
+        echo "Deploying to production..."
