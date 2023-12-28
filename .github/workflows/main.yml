@@ -22,7 +22,6 @@ jobs:
         id: extract_version
         run: echo "::set-output name=version::$(echo $GITHUB_REF | sed 's/refs\/tags\///' | sed 's/v//')"
 
-
       - name: Update Version
         run: echo "version=${{ steps.extract_version.outputs.version }}" >> version.txt
 
